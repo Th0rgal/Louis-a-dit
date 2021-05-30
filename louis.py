@@ -23,7 +23,7 @@ def create_image(text):
     for line, h in lines:
         drawable.text((x, y), line, fill =(0, 0, 0), font=font)
         y += h
-    img.save("latest.jpg")
+    img.save("./src/latest.jpg")
 
 import discord
 from config import TomlConfig
