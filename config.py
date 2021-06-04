@@ -28,4 +28,4 @@ class TomlConfig(Config):
         config = toml.load(config_file)
         bot = config["bot"]
         self.token = bot["token"]
-
+        self.users = config["users"]

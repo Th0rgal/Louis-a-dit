@@ -1,2 +1,9 @@
 [bot]
 token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+[users]
+
+    [users.louis]
+    id = "111111111111111"
+    prefix = "louis said"
+    image = "src/louis.jpg"
