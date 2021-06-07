@@ -1,4 +1,5 @@
 [bot]
+bot = true
 token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 [users]
@@ -7,3 +8,7 @@ token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     id = "111111111111111"
     prefix = "louis said"
     image = "src/louis.jpg"
+    width = 400
+    height = 250
+    x = 40
+    y = 30
