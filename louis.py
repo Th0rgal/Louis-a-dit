@@ -56,14 +56,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.content == "":
         return
 
     for username in config.users:
         user = config.users[username]
         if message.clean_content.lower().startswith(user["prefix"]):
             
-            txt = message.clean_content[12:]
+            txt = message.clean_content[len(user["prefix"]):]
             create_image(txt, user)
             await message.channel.send(file=discord.File("~output.jpg"))
             return
@@ -74,4 +74,4 @@ async def on_message(message):
             await message.channel.send(file=discord.File("~output.jpg"))
 
 
-client.run(config.token)
+client.run(config.token, bot=config.bot)

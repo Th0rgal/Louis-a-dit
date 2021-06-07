@@ -27,5 +27,6 @@ class TomlConfig(Config):
     def load_config(self, config_file):
         config = toml.load(config_file)
         bot = config["bot"]
+        self.bot = bot["bot"]
         self.token = bot["token"]
         self.users = config["users"]
