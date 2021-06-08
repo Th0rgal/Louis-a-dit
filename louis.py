@@ -44,6 +44,7 @@ def create_image(text, user):
         y += h
     img.save("~output.jpg")
 
+import re
 import discord
 from config import TomlConfig
 
@@ -62,16 +63,24 @@ async def on_message(message):
     for username in config.users:
         user = config.users[username]
         if message.clean_content.lower().startswith(user["prefix"]):
-            
-            txt = message.clean_content[len(user["prefix"]):]
-            create_image(txt, user)
-            await message.channel.send(file=discord.File("~output.jpg"))
+            await message.delete()
+            await send_message(message.channel,  message.clean_content[len(user["prefix"]):], message.attachments, user)
             return
     
         if user["id"] == message.author.id:
             await message.delete()
-            create_image(message.clean_content, user)
-            await message.channel.send(file=discord.File("~output.jpg"))
+            await send_message(message.channel, message.clean_content, message.attachments, user)
 
+async def send_message(channel, content, attachments, user):
+        urls = re.findall('https?://[^\s]+', content)
+        for attachment in attachments:
+            urls.append(attachment.url)
+        create_image(content, user)
+        await channel.send(file=discord.File("~output.jpg"))
+        if urls:
+            embedVar = discord.Embed(title="Ressources:", color=0x336EFF)
+            for i, url in enumerate(urls):
+                embedVar.add_field(name=url, value="\u200b", inline=False)
+            await channel.send(embed=embedVar)
 
 client.run(config.token, bot=config.bot)
